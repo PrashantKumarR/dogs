@@ -7,6 +7,8 @@ import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.example.dogs.R
 import com.example.dogs.model.DogBreed
+import com.example.dogs.util.getProgressDrawable
+import com.example.dogs.util.loadImage
 import kotlinx.android.synthetic.main.item_dog.view.*
 
 class DogsListAdapter(val dogList: ArrayList<DogBreed>) :
@@ -30,6 +32,10 @@ class DogsListAdapter(val dogList: ArrayList<DogBreed>) :
             action.dogUuid = position
             Navigation.findNavController(it).navigate(action)
         }
+        holder.view.imageView.loadImage(
+            dogList[position].imageUrl,
+            getProgressDrawable(holder.view.imageView.context)
+        )
     }
 
     fun updateDogList(newDogList: List<DogBreed>) {

@@ -36,6 +36,13 @@ class ListFragment : Fragment() {
         dogsList.apply {
             layoutManager = LinearLayoutManager(context)
             adapter = dogListAdapter
+            refreshLayout.setOnRefreshListener {
+                dogsList.visibility = View.GONE
+                listError.visibility = View.GONE
+                loadingView.visibility = View.VISIBLE
+                viewModel.refresh()
+                refreshLayout.isRefreshing = false
+            }
         }
         observeViewModel()
     }
@@ -56,7 +63,7 @@ class ListFragment : Fragment() {
 
         viewModel.loading.observe(this, Observer {
             it?.let {
-                proloadingView.visibility = if (it) View.VISIBLE else View.GONE
+                loadingView.visibility = if (it) View.VISIBLE else View.GONE
                 if (it) {
                     listError.visibility = View.GONE
                     dogsList.visibility = View.GONE
