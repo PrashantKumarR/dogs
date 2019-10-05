@@ -10,6 +10,8 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.dogs.R
 
+val PERMISSION_SEND_SMS = 123
+
 fun getProgressDrawable(context: Context): CircularProgressDrawable {
     return CircularProgressDrawable(context).apply {
         strokeWidth = 10f
@@ -30,6 +32,6 @@ fun ImageView.loadImage(uri: String?, progressDrawable: CircularProgressDrawable
 }
 
 @BindingAdapter("android:imageUrl")
-fun loadImage(view:ImageView, url:String?){
+fun loadImage(view: ImageView, url: String?) {
     view.loadImage(url, getProgressDrawable(view.context))
 }
